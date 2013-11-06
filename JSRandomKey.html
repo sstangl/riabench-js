@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<!--
+	Copyright (c) 2010 Timo Ernst - http://www.timo-ernst.net
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in
+	all copies or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	THE SOFTWARE.
+-->
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>RIABench: Pseudo random key generator</title>
+		<script type="text/JavaScript">
+		<!--
+			var startTime;
+			var stopTime;
+			var textBox;
+			var randomNumbers = new Array;
+			var currentSeed = 0;
+			var startTime;
+			var stopTime;
+			var numOfNumbers = 1000000;
+			
+			function JSPseudoRandGen(){
+				randomNumbers.push(0);
+			 	textBox = document.getElementById('mytext');
+				setTimeout('startGenerate()', 1000);
+			}
+			
+			function startGenerate(){
+				startTime = new Date();
+				
+				for (var i=0; i<numOfNumbers; i++){
+					getPseudoRandomNumber(currentSeed);
+					currentSeed++;
+				}
+			
+				stopTime = new Date();
+				
+				var timeElapsed = stopTime.getTime() - startTime.getTime();
+				textBox.innerHTML = 'Time elapsed: ' + timeElapsed + ' ms ';
+				// textBox.innerHTML += '<br /><br />Generated numbers:<br />' + getNumbers();
+			}
+			
+			/**
+			 * Will return a string-representation of all computed random numbers so far
+			 */
+			function getNumbers(){
+				var res = '';
+				var i = 1;
+				var num = "";
+				for (var i=1; i<randomNumbers.length; i++){
+					num = randomNumbers[i];
+					res += num + ' ';
+					if (i % 15 == 0){
+						res += '<br />';
+					}
+				}
+				return res;
+			}
+			
+			/**
+			 * Generator for pseudo random numbers.
+			 * Will always produce the same numbers if the starting
+			 * number randomNumbers[0] is the same.
+			 * Algorithm: Linear congruency method
+			 */
+			function getPseudoRandomNumber(y){
+				// Hard-coded init-values for generator initialization
+				var m = 281474976710656;
+				var b = 29741096258473;
+				var a = 513;
+			
+				var randomNumber = (a * randomNumbers[y] + b) % m;
+			
+				randomNumbers.push(randomNumber);
+				
+				return randomNumber;
+			}	
+
+		//-->
+		</script>
+
+	</head>
+
+	<body onload="JSPseudoRandGen()">
+		<h1>RIABench: Random key generator test (JavaScript)</h1>
+		<h2>Generating 1000000 random numbers (using linear congruency method).. Please wait</h2>
+		<div id="mytext"></div>
+	</body>
+
+</html>
